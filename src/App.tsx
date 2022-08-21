@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import CallerPage from "./components/pages/callerPage";
+import axios from "axios";
+import { Routes, Route } from "react-router-dom";
+import ViewArea from "./components/pages/viewArea";
+import { useRef } from "react";
 function App() {
+  const people = ["deba", "ayo", "ngozi", "joel", "david"];
+  const officers = useRef(require("./components/data.json"));
+  const getId = (name: string) => {
+    const obj = officers.current.find((item: any) => item.name === name);
+    return obj === undefined ? "not found" : obj.officeId;
+  };
+  const mine = getId(people[Math.floor(Math.random() * 5)]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<CallerPage mine={mine} />} />
+        <Route path={`/join=:room`} element={<ViewArea  mine={mine} />} />
+      </Routes>
+    </>
   );
 }
 

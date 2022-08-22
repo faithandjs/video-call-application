@@ -4,8 +4,14 @@ const socket = io("ws://localhost:4000");
 
 const ViewArea = ({ mine }: { mine: string }) => {
   useEffect(() => {
-// socket.emit('')
-
+    const room_id = window.location.pathname.substring(6);
+    console.log(room_id, mine, "reload?");
+    if (room_id !== mine) {
+      socket.emit("reciever", room_id, mine);
+      console.log("here");
+    } else {
+      socket.emit("caller-view", mine, mine);
+    }
     navigator.mediaDevices
       .getUserMedia({
         video: true,
@@ -26,8 +32,13 @@ const ViewArea = ({ mine }: { mine: string }) => {
         //   call.answer(stream);
         // });
       });
+  }, []);
+  socket.on("no-exist", () => {
+    console.log("room does not exist");
   });
-
+  socket.on("in-call", (args) => {
+    console.log(args);
+  });
   return (
     <>
       <header></header>

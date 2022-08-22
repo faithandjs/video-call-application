@@ -21,43 +21,14 @@ const CallerPage = ({ mine }: { mine: string }) => {
     console.log(window.location.pathname);
     if (window.location.pathname === "/") {
       socket.emit("caller", mine);
-    } else {
-      const room_id = window.location.pathname;
-      socket.emit("reciever", room_id.substring(1, room_id.length - 1), mine);
-    }
+    } 
   }, []);
-  socket.on("joined", (currentRoom) => {
+  socket.on("join", (currentRoom) => {
     navigate(`/join=${currentRoom}`);
   });
-  // socket.on("participants", (args) => {
-  //   // console.log(args);
-  //   args.map((item: participantsProp, index: number) => {
-  //     if (item.id !== my_id) {
-  //       // console.log(item);
-  //       // addVideoStream(item.videoStream);
-  //     }
-  //   });
-  // });
-  myPeer.on("open", (id) => {
-    // socket.emit("join-room", ROOM_ID, id);
-  });
-  // socket.emit("join-room", ROOM_ID, 10);
-
-  //   const connectToNewUser = (userId: string, stream: MediaStream) => {
-  //     const call = myPeer.call(userId, stream);
-  //     const video = document.createElement("video");
-
-  //     call.on("stream", (userVideoStream) => {
-  //       addVideoStream(userVideoStream);
-  //     });
-
-  //     call.on("close", () => {
-  //       video.remove();
-  //     });
-  //   };
-
+  myPeer.on("open", (id) => {});
   const addVideoStream = (stream: MediaStream) => {
-    console.log(stream);
+    // console.log(stream);
     const videos_box: HTMLDivElement = document.querySelector(
       ".videos .otherUsers"
     )!;

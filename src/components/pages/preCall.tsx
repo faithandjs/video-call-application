@@ -1,18 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../callerPage.scss";
+import "../styles.scss";
 import { Peer } from "peerjs";
 import { io } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 
 const socket = io("ws://localhost:4000");
 
-const CallerPage = ({ mine }: { mine: string }) => {
+const PreCall = ({ mine }: { mine: string }) => {
   const navigate = useNavigate();
-
-  const myPeer = new Peer(mine, {
-    host: "/",
-    port: 3001,
-  });
   const [my_id, setMy_id] = useState(Math.floor(Math.random() * 100));
 
   const ROOM_ID = useRef();
@@ -21,12 +16,12 @@ const CallerPage = ({ mine }: { mine: string }) => {
     console.log(window.location.pathname);
     if (window.location.pathname === "/") {
       socket.emit("caller", mine);
-    } 
+    }
   }, []);
   socket.on("join", (currentRoom) => {
     navigate(`/join=${currentRoom}`);
   });
-  myPeer.on("open", (id) => {});
+  // myPeer.on("open", (id) => {});
   const addVideoStream = (stream: MediaStream) => {
     // console.log(stream);
     const videos_box: HTMLDivElement = document.querySelector(
@@ -45,4 +40,4 @@ const CallerPage = ({ mine }: { mine: string }) => {
   return <></>;
 };
 
-export default CallerPage;
+export default PreCall;

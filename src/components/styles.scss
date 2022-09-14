@@ -1,0 +1,147 @@
+$red: rgb(255, 28, 28);
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: unset;
+  border: 0;
+  outline: 0;
+  text-decoration: none;
+}
+ul {
+  list-style-type: none;
+}
+main {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  .video-area {
+    width: 73%;
+    position: relative;
+    .videos {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      video {
+        border-radius: 2%;
+        width: 80%;
+        height: 80vh;
+        object-fit: cover;
+        transform: rotatey(180deg);
+      }
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      div {
+        img {
+          width: 39px;
+          padding: 8px;
+          margin: auto 9px;
+          border-radius: 50%;
+          background-color: rgb(224, 224, 224);
+        }
+        &.end-call {
+          img {
+            background-color: $red;
+          }
+        }
+        &:hover {
+          cursor: pointer;
+        }
+        &.false {
+          position: relative;
+          &::after {
+            position: absolute;
+            content: "";
+            left: 50%;
+            top: -8%;
+            width: 2px;
+            height: 48px;
+            background-color: $red;
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+  }
+  .chat-area {
+    // width: clamp(400px, 30%, 600px);
+    // width: 25%;
+    background-color: rgb(238, 238, 238);
+    position: relative;
+    padding: 12px 8px 0;
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      // height: 5px;
+      background: rgba(189, 189, 189, 0.795);
+      border-radius: 15px;
+    }
+    h2 {
+    }
+    .msg-area {
+      height: 80vh;
+      overflow: auto;
+
+      ul {
+        padding: 20px 0;
+        margin-right: 10px;
+
+        li {
+          margin-bottom: 9px;
+          display: flex;
+          width: 100%;
+          div {
+            max-width: 90%;
+            min-width: 30%;
+            background-color: white;
+            border-radius: 7px;
+            padding: 5px 10px 5px 5px;
+            p {
+              &:first-child {
+                font-size: 0.8rem;
+                font-weight: bold;
+              }
+              &:last-child {
+                padding: 1px 2px 2px 0;
+              }
+            }
+          }
+          &.mine {
+            justify-content: flex-end;
+            div {
+              background-color: rgb(38, 153, 230);
+            }
+          }
+        }
+      }
+    }
+    form {
+      width: -webkit-fill-available;
+      background-color: rgb(255, 255, 255);
+      position: sticky;
+      padding: 10px 0;
+      top: 100%;
+      display: flex;
+      justify-content: space-between;
+      input {
+        border: 1px solid grey;
+        padding: 10px 3px;
+      }
+      button {
+        background-color: black;
+        color: white;
+        padding: 0 20px;
+        // width: 13%;
+      }
+    }
+  }
+}

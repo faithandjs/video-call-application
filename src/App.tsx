@@ -1,4 +1,4 @@
-import CallerPage from "./components/pages/callerPage";
+import PreCall from "./components/pages/preCall";
 import axios from "axios";
 import { Routes, Route } from "react-router-dom";
 import ViewArea from "./components/pages/viewArea";
@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<CallerPage mine={mine} />} />
+        <Route path="/" element={<PreCall mine={mine} />} />
         <Route path={`/join=:room`} element={<ViewArea mine={mine} />} />
       </Routes>
     </>
